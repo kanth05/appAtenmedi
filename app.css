@@ -1,0 +1,94 @@
+body, html {
+    background-color:rgb(237, 243, 237);
+    height: 100%;
+}
+
+#videos {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#subscriber {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+#publisher {
+    position: absolute;
+    width: 300px;
+    height: 180px;
+    bottom: 10px;
+    margin-bottom: 10px;
+    left: 10px;
+    z-index: 100;
+    border: 3px solid white;
+    border-radius: 3px;
+}
+
+.btn-position{
+    position: absolute;
+    text-decoration-style: none;
+    width: 7%;
+    height: 10%;
+    z-index: 100;
+    right: 10%;
+    top: 80%;
+}
+
+.ventana{
+    text-align: center;
+}
+
+.modal-class{
+    width: 1000px;
+    height: 600px;
+    z-index: 1050;
+}
+
+@media (max-width: 576px) {
+
+    body, html {
+        background-color:rgb(22, 26, 22);
+        height: 100%;
+        color: ivory;
+    }
+    
+    #subscriber {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+    
+    #publisher {
+        position: absolute;
+        float: left;
+        width: 90px;
+        height: 120px;
+        bottom: 5;
+        margin-bottom: 10px;
+        z-index: 100;
+        border: 1px solid white;
+        border-radius: 3px;
+    } 
+
+    .btn-position{
+        font-size: 3px;
+        position: absolute;
+        width: 10%;
+        height: 8%;
+        z-index: 100;
+        right: 12%;
+        top: 84%;
+    }
+
+}
