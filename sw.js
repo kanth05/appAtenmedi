@@ -1,14 +1,12 @@
 //asignar un nombre y versión al cache
-
-const CACHE_NAME = 'v2_cache_programador_php',
+const base_url = 'http://localhost/Atenmedic/';
+const CACHE_NAME = 'v5_cache_programador_php',
  urlsToCache = [
-     './clientePaciente.php',
-     './clienteDoctor.php',
-     './plugins/Tokbox/tokbox.js',     
-     './app.js',
-     './dist/img/ICONO.png',
-     './dist/css/adminlte.css',
-     './app.css',
+     base_url+'plugins/Tokbox/tokbox.js',     
+     base_url+'app.js',
+     base_url+'dist/img/ICONO.png',
+     base_url+'dist/css/adminlte.css',
+     base_url+'app.css',
  ]
 //durante la fase de instalación, generalmente se almacena en caché los activos estáticos
 self.addEventListener('install', e => {

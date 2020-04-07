@@ -59,6 +59,7 @@ class loginPacienteController{
 				header("Location:".base_url."paciente/Menuvideo");
 
 			}else{
+				
 				$_SESSION['identity'] = 'failed';
 				header("Location:".base_url);
 			}

@@ -9,35 +9,41 @@
     require_once 'config/utils.php';
     require_once 'config/parameters.php';
 
-    // if(!isset($_SESSION['identity']) && isset($_SESSION['control'])){
-    //     $_SESSION['identity'] = $_SESSION['control'];  
-    // }
+
+    //La siguiente sección lo que hará es discriminar cual header usar según la pantalla a la cual se está accediendo.
 
     if((!isset($_SESSION['identity']) && !isset($_SESSION['identityDoctor']))){
-       require_once ('views/layout/login/header.php');
+
+        //Header correspondiente al login
+        require_once ('views/layout/login/header.php');
+
+    }elseif(isset($_SESSION['identity']) && !isset($_SESSION['identity']['video'])){
+
+        //Header correspondiente al login del paciente, pero mostrando el error de usuario
+        require_once ('views/layout/login/header.php');
 
     }elseif(isset($_SESSION['identity']) && $_SESSION['identity']['video'] == 'no'){
 
-        if($_SESSION['identity'] == 'failed'){
-            require_once ('views/layout/login/header.php');
-        }else{
-            require_once ('views/layout/homePaciente/header.php');
-        }
+        //Se cambia al header que se maneja para el menu de opracione sdel paciente
+        require_once ('views/layout/homePaciente/header.php');
 
     }elseif(isset($_SESSION['identity']) && $_SESSION['identity']['video'] == 'si'){
-
+        //Header correspondiente a la video llamada 
         require_once ('views/layout/video/header.php');
+
+    }elseif(isset($_SESSION['identityDoctor']) && !isset($_SESSION['identityDoctor']['video'])){
+
+        //Header correspondiente al login del doctor, pero mostrando el error de usuario
+        require_once ('views/layout/login/header.php');
 
     }elseif(isset($_SESSION['identityDoctor']) && $_SESSION['identityDoctor']['video'] == 'no'){
 
-        if($_SESSION['identityDoctor'] == 'failed'){
-            require_once ('views/layout/login/header.php');
-        }else{
-            require_once ('views/layout/homeDoctor/header.php');
-        }
+        //Se cambia al header que se maneja para el menu de opraciones del doctor
+        require_once ('views/layout/homeDoctor/header.php');
 
     }elseif(isset($_SESSION['identityDoctor']) && $_SESSION['identityDoctor']['video'] == 'si'){
-
+        
+        //Header correspondiente a la video llamada 
         require_once ('views/layout/video/header.php');
 
     }
@@ -80,20 +86,38 @@
         show_error();
     }
 
-
     if((!isset($_SESSION['identity']) && !isset($_SESSION['identityDoctor']))){
+
+        //footer correspondiente al login
+        require_once ('views/layout/login/footer.php');
+
+    }elseif(isset($_SESSION['identity']) && !isset($_SESSION['identity']['video'])){
+
+        //footer correspondiente al login del paciente, pero mostrando el error de usuario
         require_once ('views/layout/login/footer.php');
 
     }elseif(isset($_SESSION['identity']) && $_SESSION['identity']['video'] == 'no'){
+
+        //Se cambia al footer que se maneja para el menu de opracione sdel paciente
         require_once ('views/layout/homePaciente/footer.php');
 
     }elseif(isset($_SESSION['identity']) && $_SESSION['identity']['video'] == 'si'){
+        //footer correspondiente a la video llamada 
         require_once ('views/layout/video/footer.php');
 
+    }elseif(isset($_SESSION['identityDoctor']) && !isset($_SESSION['identityDoctor']['video'])){
+
+        //footer correspondiente al login del doctor, pero mostrando el error de usuario
+        require_once ('views/layout/login/footer.php');
+
     }elseif(isset($_SESSION['identityDoctor']) && $_SESSION['identityDoctor']['video'] == 'no'){
+        
+        //Se cambia al footer que se maneja para el menu de opraciones del doctor
         require_once ('views/layout/homeDoctor/footer.php');
 
     }elseif(isset($_SESSION['identityDoctor']) && $_SESSION['identityDoctor']['video'] == 'si'){
+        
+        //footer correspondiente a la video llamada 
         require_once ('views/layout/video/footer.php');
 
     }
