@@ -15,15 +15,10 @@
                         
                         <!-- col  -->
                         <div class="col-12">
-  
-                          <div class="card card-info ">
-                            <div class="card-header">
-                              <h3 class="card-title ">Perfil del usuario</h3>
-                            </div>
-                            <!-- /.card-header -->
+                            <h3 class="font-weight-bold mb-5">Perfil del usuario</h3>
+
                             <!-- form start -->
                             <form role="form">
-                              <div class="card-body pb-0">
                                 <div class="form-group">
                                   <label>Usuario:  </label>
                                  <span> <?= $_SESSION['identity']['nombre']?> </span> 
@@ -59,10 +54,6 @@
                     
                   </section>
                   
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
             </div>
             <!-- /.col -->
           </div>

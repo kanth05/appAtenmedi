@@ -14,11 +14,8 @@
                       <div class="row">
                         <!-- col  -->
                         <div class="col-12">
-  
-                          <div class="card card-info">
-                            <div class="card-header">
-                              <h3 class="card-title">Solicitud de servicio</h3>
-                            </div>
+
+                            <h3 class="font-weight-bold">Solicitud de servicio</h3>
                             <!-- /.card-header -->
 
                             <!-- Formulario inicial para seleccionar el servicio -->
@@ -29,7 +26,7 @@
                                   <div class="form-group">
                                     <label for="tipoServicio">Tipo de servicio</label>
                                     <select class="custom-select my-1" id="tipoServicio" name="tipoServicio">
-                                          <option selected>Servicio</option>
+                                          <option selected disabled value="">Servicio</option>
                                           <option value="1">Traslado</option>
                                           <option value="2">AMD</option>
                                       </select>
@@ -133,10 +130,6 @@
                     
                   </section>
                   
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
             </div>
             <!-- /.col -->
           </div>
