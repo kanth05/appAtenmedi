@@ -176,8 +176,6 @@ class pacienteController{
 					header('Location:'.base_url.'loginPaciente/registro');
 				}
 				
-				var_dump('holaaaaaa');
-				die();
 
 				if($cedula == 20127909){
 					//$usuario->save();
