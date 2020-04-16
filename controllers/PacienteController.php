@@ -9,7 +9,17 @@ class pacienteController{
 		if(isset($_SESSION['servicio'])){
 			unset($_SESSION['servicio']);
 		}
-		require_once ('./views/paciente/homeVideo.php');
+
+		if(isset($_SESSION['identity'])){
+
+			$_SESSION['identity']['chat'] = 'no';
+			require_once ('./views/paciente/homeVideo.php');
+
+		}else{
+
+			header('Location:'.base_url);
+
+		}
 
 	}
 
@@ -18,23 +28,51 @@ class pacienteController{
 		if(isset($_SESSION['servicio'])){
 			unset($_SESSION['servicio']);
 		}
-		require_once ('./views/paciente/homeChat.php');
+
+		if(isset($_SESSION['identity'])){
+
+			$_SESSION['identity']['chat'] = 'no';
+			require_once ('./views/paciente/homeChat.php');
+
+		}else{
+
+			header('Location:'.base_url);
+
+		}
 
 	}
 
 	public function menuServ(){
 
+		if(isset($_SESSION['identity'])){
+
+			if(!isset($_POST['tipoServicio'])){
+				$_SESSION['identity']['chat'] = 'no';
+				require_once ('./views/paciente/homeServicios.php');
+			}else{
+				$_SESSION['servicio'] = $_POST['tipoServicio'];
+				require_once ('./views/paciente/homeServicios.php');
+			}
+
+		}else{
+
+			header('Location:'.base_url);
+
+		}
+
+	}
+	
+	public function menuServSet(){
+
 		if(isset($_SESSION['servicio'])){
 			unset($_SESSION['servicio']);
 		}
-		if(!isset($_POST['tipoServicio'])){
-			require_once ('./views/paciente/homeServicios.php');
-		}else{
-			$servicio = $_POST['tipoServicio'];
-			$_SESSION['servicio'] = $servicio;
-			require_once ('./views/paciente/homeServicios.php');
-		}
 
+		if(isset($_SESSION['identity'])){
+			header('Location:'.base_url.'paciente/menuServ');
+		}else{
+			header('Location:'.base_url);
+		}
 	}
 
 	public function menuPerfil(){
@@ -42,28 +80,203 @@ class pacienteController{
 		if(isset($_SESSION['servicio'])){
 			unset($_SESSION['servicio']);
 		}
-		require_once ('./views/paciente/homePerfil.php');
+
+		if(isset($_SESSION['identity'])){
+
+			$_SESSION['identity']['chat'] = 'no';
+			require_once ('./views/paciente/homePerfil.php');
+
+		}else{
+
+			header('Location:'.base_url);
+
+		}
 
 	}
 
 	public function solicitarServicio(){
 
-		unset($_SESSION['servicio']);
-		require_once ('./views/paciente/homeVideo.php');
+		if(isset($_POST)){
+
+			//Validación de los campos recibidos por POST
+
+			// Array de errores
+			$errores = array();
+
+			// Validar los datos antes de guardarlos en la base de datos
+			$causa     = isset($_POST['causa'])     ? $_POST['causa']     : false;
+			$sintoma   = isset($_POST['sintoma'])   ? $_POST['sintoma']     : false;
+			$fecha     = isset($_POST['fecha'])     ? $_POST['fecha']     : false;
+
+
+			// Validar campo causa
+			if(empty($causa)){
+
+				$errores['causa'] = "El campo causa no puede estar vacío.";
+			}
+
+			// Validar campo sintoma
+			if(empty($sintoma)){
+
+				$errores['sintoma'] = "El campo sintoma no puede estar vacío.";
+			}
+
+			// Validar campo fecha
+			if(empty($fecha)){
+
+				$errores['causa'] = "El campo fecha no puede estar vacío.";
+			}
+
+			if($_SESSION['servicio'] == '1'){
+
+				
+				$Dsalida   = isset($_POST['Dsalida'])   ? $_POST['Dsalida']     : false;
+				$Dllegada   = isset($_POST['Dllegada'])   ? $_POST['Dllegada']     : false;
+
+				// Validar campo Dsalida
+				if(empty($Dsalida)){
+
+					$errores['Dsalida'] = "El campo Dsalida no puede estar vacío.";
+				}
+	
+				// Validar campo Dllegada
+				if(empty($Dllegada)){
+	
+					$errores['Dllegada'] = "El campo Dllegada no puede estar vacío.";
+				}
+
+			}else{
+
+				$direccion   = isset($_POST['direccion'])   ? $_POST['direccion']     : false;
+
+				// Validar campo direccion
+				if(empty($direccion)){
+
+					$errores['direccion'] = "El campo direccion no puede estar vacío.";
+				}
+
+			}	
+
+			if(count($errores) == 0){
+
+				//De momento redirigimos hacia la pantalla de video, porque no se envía aún ninguna información.
+				header('Location:'.base_url.'paciente/menuVideo');
+				
+
+			}else{
+				$_SESSION['error'] = $errores;
+				header('Location:'.base_url.'paciente/menuServ');
+			}
+
+		}else{
+			$_SESSION['error'] = 'failed';
+			header('Location:'.base_url.'loginPaciente/menuServ');
+		}
 
 	}
 
 	public function solicitarVideo(){
 
-		$_SESSION['identity']['video'] = 'si';
+		//Valida los campos de causa y sintomas
+		if(isset($_POST)){
+			
+			$causa     = isset($_POST['causa'])     ? $_POST['causa']     : false;
+			$sintoma   = isset($_POST['sintoma'])   ? $_POST['sintoma']     : false;
 
-		header('Location:'.base_url.'paciente/video');
+			//Validación de los campos recibidos por POST
+
+			// Array de errores
+			$errores = array();
+			
+			// Validar los datos antes de guardarlos en la base de datos
+
+			// Validar campo causa
+			if(empty($causa)){
+
+				$errores['causa'] = "El campo causa no puede estar vacío.";
+			}
+
+			// Validar campo sintoma
+			if(empty($sintoma)){
+
+				$errores['sintoma'] = "El campo sintoma no puede estar vacío.";
+			}
+
+			if(count($errores) == 0){
+
+				$_SESSION['identity']['video'] = 'si';
+
+				header('Location:'.base_url.'paciente/video');
+				
+
+			}else{
+				$_SESSION['error'] = $errores;
+				header('Location:'.base_url.'paciente/menuVideo');
+			}
+
+		}else{
+			$_SESSION['error'] = $errores;
+			header('Location:'.base_url.'loginPaciente/menuVideo');
+		}
+
+	}
+
+	public function solicitarChat(){
+
+		//Valida los campos de causa y sintomas
+		if(isset($_POST)){
+			
+			$causa     = isset($_POST['causa'])     ? $_POST['causa']     : false;
+			$sintoma   = isset($_POST['sintoma'])   ? $_POST['sintoma']   : false;
+
+			//Validación de los campos recibidos por POST
+
+			// Array de errores
+			$errores = array();
+			
+			// Validar los datos antes de guardarlos en la base de datos
+
+			// Validar campo causa
+			if(empty($causa)){
+
+				$errores['causa'] = "El campo causa no puede estar vacío.";
+			}
+
+			// Validar campo sintoma
+			if(empty($sintoma)){
+
+				$errores['sintoma'] = "El campo sintoma no puede estar vacío.";
+			}
+
+			if(count($errores) == 0){
+
+				$_SESSION['identity']['chat'] = 'si';
+
+
+				header('Location:'.base_url.'paciente/chat');
+				
+
+			}else{
+				$_SESSION['error'] = $errores;
+				header('Location:'.base_url.'paciente/menuChat');
+			}
+
+		}else{
+			$_SESSION['error'] = 'failed';
+			header('Location:'.base_url.'loginPaciente/menuChat');
+		}	
 
 	}
 
 	public function video(){
 
 		require_once ('views/paciente/roomVideo.php');
+
+	}
+
+	public function chat(){
+
+		require_once ('./views/paciente/roomChat.php');
 
 	}
 
@@ -76,8 +289,17 @@ class pacienteController{
 
 	}
 
+	public function terminarChat(){
+
+		$_SESSION['identity']['chat'] = 'no';
+
+		header('Location:'.base_url.'paciente/menuVideo');
+
+	}
+
 	
 	public function save(){
+
 		if(isset($_POST)){
 			
 			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
@@ -108,6 +330,9 @@ class pacienteController{
 	}
 
 	public function validaProducto(){
+
+		$espCaracteres = '/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/';
+
 		//Valida que la cédula insertada exista en l bd del cliente para el producto que usa
 
 		if(isset($_POST)){
@@ -167,18 +392,39 @@ class pacienteController{
 				$errores['terminos'] = 'Debe aceptar los terminos para registrarse.';
 			}
 
-			if(count($errores) == 0){
+			//Validacion de contraseña, si son iguales, tienen la cantidad establecida y no poseen caracteres especiales
+			if($password != $repassword){
 
+				$errores['errorClave'] = "La contraseña tiene que ser igual en ambos campos.";
+				$errores['password'] = "No coincide";
+				$errores['repassword'] = "No coincide";
 				
-				if($password != $repassword){
+			}else{
 
-					$_SESSION['errorPassword'] = "La contraseña tiene que ser igual en ambos campos.";
-					header('Location:'.base_url.'loginPaciente/registro');
+				$longitudClave = strlen($password);
+
+				if($longitudClave < 8 || $longitudClave > 12){
+ 
+					$errores['errorClave'] = "La contraseña debe tener entre 8 a 12 caracteres.";
+					$errores['password']   = "No es apta";
+					$errores['repassword'] = "No es apta";
+
 				}
-				
+
+				if(preg_match($espCaracteres, $password)){
+
+					$errores['errorClave'] = "La contraseña no debe tener caracteres como: $%&_-:; .";
+					$errores['password']   = "No es apta";
+					$errores['repassword'] = "No es apta";
+				}
+
+			}
+
+			if(count($errores) == 0){
 
 				if($cedula == 20127909){
 					//$usuario->save();
+
 					$_SESSION['register'] = 'completed';
 					header('Location:'.base_url.'loginPaciente/registro');
 				}else{

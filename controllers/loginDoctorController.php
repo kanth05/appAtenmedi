@@ -33,7 +33,7 @@ class loginDoctorController{
 			$cedula   = $_POST['cedula'];
 			$password = $_POST['password'];
 
-			if($cedula == 19712365 && $password == 'hola'){
+			if($cedula == 19712365 && $password == '123456789'){
 
 				$identity =[
 					'nombre'   => "Pedro Alcantara",
@@ -42,6 +42,7 @@ class loginDoctorController{
                     'cargo'    => "Doctor",
 					'status'   => "Conectado",
 					'video'    => 'no',
+					'chat'     => 'no',
 					'rol'      => 'doctor'
 				];
 

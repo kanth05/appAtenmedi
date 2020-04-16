@@ -11,8 +11,8 @@
                             <div class="card-body register-card-body">
                             <p class="login-box-msg">Registrar nuevo usuario</p>
 
-                            <?php if(isset($_SESSION['errorPassword'])) :?>
-                                <p class="login-box-msg text-danger"><?=$_SESSION['errorPassword']?></p>
+                            <?php if(isset($_SESSION['error']['errorClave'])) :?>
+                                <p class="login-box-msg text-danger"><?=$_SESSION['error']['errorClave']?></p>
                             <?php elseif(isset($_SESSION['error'])): ?>
                                 <p class="login-box-msg text-danger">Faltaron completar los campos remarcados</p>
                             <?php endif?>

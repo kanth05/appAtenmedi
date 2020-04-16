@@ -8,7 +8,7 @@
     <!-- /.control-sidebar --> 
 
     <!-- footer -->
-    <footer class="main-footer bg-success" style="margin-left: 0px !important;">
+    <footer class="main-footer bg-success py-2 px-0" style="margin-left: 0px !important;">
 
         <div class="container-xs d-block d-sm-none">
           <div class="row justify-content-center">
@@ -68,6 +68,7 @@
 <!-- AdminLTE App -->
 <script type="text/javascript" src="<?=base_url?>dist/js/adminlte.min.js"></script>
 <!-- Services worker -->
+<script>let base_url = '<?=base_url?>';</script>
 <script type="text/javascript" src="<?=base_url?>app.js"></script>
 
 </body>

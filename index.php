@@ -91,12 +91,13 @@
         //footer correspondiente al login
         require_once ('views/layout/login/footer.php');
 
-    }elseif(isset($_SESSION['identity']) && !isset($_SESSION['identity']['video'])){
+    }elseif((isset($_SESSION['identity']) && !isset($_SESSION['identity']['video']))){
 
         //footer correspondiente al login del paciente, pero mostrando el error de usuario
         require_once ('views/layout/login/footer.php');
 
-    }elseif(isset($_SESSION['identity']) && $_SESSION['identity']['video'] == 'no'){
+    }elseif(isset($_SESSION['identity']) && $_SESSION['identity']['video'] == 'no' && 
+            $_SESSION['identity']['chat'] == 'no'){
 
         //Se cambia al footer que se maneja para el menu de opracione sdel paciente
         require_once ('views/layout/homePaciente/footer.php');
@@ -105,6 +106,10 @@
         //footer correspondiente a la video llamada 
         require_once ('views/layout/video/footer.php');
 
+    }elseif((isset($_SESSION['identity']) && $_SESSION['identity']['chat'] == 'si')){
+
+        require_once ('views/layout/chat/footer.php');
+    
     }elseif(isset($_SESSION['identityDoctor']) && !isset($_SESSION['identityDoctor']['video'])){
 
         //footer correspondiente al login del doctor, pero mostrando el error de usuario
@@ -120,6 +125,9 @@
         //footer correspondiente a la video llamada 
         require_once ('views/layout/video/footer.php');
 
+    }elseif((isset($_SESSION['identityDoctor']) && $_SESSION['identityDoctor']['chat'] == 'si')){
+
+        require_once ('views/layout/chat/footer.php');
     }
  
  ?>

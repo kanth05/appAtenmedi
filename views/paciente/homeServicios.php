@@ -1,4 +1,5 @@
-
+      <!-- <section class="content-header">
+      </section> -->
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -51,29 +52,50 @@
                                     <label for="tipoServicio">Servicio de traslado</label>
                                   </div>
                                   <div class="form-group">
-                                    <label for="causa">Causa de la llamada</label>
-                                    <input type="text" class="form-control" name="causa" placeholder="Causa">
+                                    <label for="causa">Causa del traslado:</label>
+                                    <?php if(!isset($_SESSION['error']['causa'])): ?>
+                                      <input type="text" class="form-control" name ="causa" placeholder="Causa">
+                                    <?php else: ?>
+                                      <input type="text" class="form-control is-invalid" name ="causa" placeholder="Causa">
+                                    <?php endif?>
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputPassword1">Sintomas presentados</label>
-                                    <input type="text" class="form-control" name="sintomas" placeholder="Sintomas">
+                                    <label for="exampleInputPassword1">Sintomas:</label>
+                                    <?php if(!isset($_SESSION['error']['causa'])): ?>
+                                      <input type="text" class="form-control" name ="sintoma" placeholder="Sintomas">
+                                    <?php else: ?>
+                                      <input type="text" class="form-control is-invalid" name ="sintoma" placeholder="Sintomas">
+                                    <?php endif?>
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputPassword1">Fecha del traslado</label>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false">
+                                    <label for="fecha">Fecha:</label>
+                                    <?php if(!isset($_SESSION['error']['causa'])): ?>
+                                      <input type="text" class="form-control " name="fecha" placeholder="dd/mm/yyyy">
+                                    <?php else: ?>
+                                      <input type="text" class="form-control is-invalid" name="fecha" placeholder="dd/mm/yyyy">
+                                    <?php endif?>
+                                    <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false"> -->
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputPassword1">Dirección de salida</label>
-                                    <input type="text" class="form-control" name="Dsalida" placeholder="Direccion de salida">
+                                    <label for="Dsalida">Dirección de salida:</label>
+                                    <?php if(!isset($_SESSION['error']['causa'])): ?>
+                                      <input type="text" class="form-control" name="Dsalida" placeholder="Direccion de salida">
+                                    <?php else: ?>
+                                      <input type="text" class="form-control is-invalid" name="Dsalida" placeholder="Direccion de salida">
+                                    <?php endif?>
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputPassword1">SDirección de llegada</label>
-                                    <input type="text" class="form-control" name="Dllegada" placeholder="Direccion de llegada">
+                                    <label for="Dllegada">Dirección de llegada:</label>
+                                    <?php if(!isset($_SESSION['error']['causa'])): ?>
+                                      <input type="text" class="form-control" name="Dllegada" placeholder="Direccion de llegada">
+                                    <?php else: ?>
+                                      <input type="text" class="form-control is-invalid" name="Dllegada" placeholder="Direccion de llegada">
+                                    <?php endif?>
                                   </div>
                                   <div class="form-group">
-                                  <button type="submit" class="btn btn-info btn-block">Acceder</button>
+                                    <button type="submit" class="btn btn-info btn-block">Acceder</button>
+                                    <a class="btn btn-info btn-block" href ="<?=base_url?>paciente/menuServSet">Regresar</a>
                                   </div>
-    
                                 </div>
                               </form>
 
@@ -102,16 +124,17 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Fecha de atención</label>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false">
+                                    <input type="text" class="form-control" name="sintomas" placeholder="dd/mm/yyyy">
+                                    <!-- <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false"> -->
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputPassword1">Dirección del domicilio</label>
+                                    <label for="direccion">Dirección del domicilio</label>
                                     <input type="text" class="form-control" name="direccion" placeholder="Direccion">
                                   </div>
                                   <div class="form-group">
-                                  <button type="submit" class="btn btn-info btn-block">Acceder</button>
-                                  </div>
-    
+                                    <button type="submit" class="btn btn-info btn-block">Acceder</button>
+                                    <a class="btn btn-info btn-block" href ="<?=base_url?>paciente/menuServSet">Regresar</a>
+                                  </div>    
                                 </div>
                               </form>
 
@@ -134,8 +157,8 @@
             <!-- /.col -->
           </div>
           <!-- /.row -->
-
         </div><!-- /.container-fluid -->
+        <?php unset($_SESSION['error']);?>
       </section>
       <!-- /.content -->
     

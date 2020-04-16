@@ -28504,3 +28504,14 @@ a.text-muted:hover {
 }
 
 /*# sourceMappingURL=adminlte.css.map */
+
+.auto-height{
+  height: 75vh !important;
+}
+
+@media (max-width: 576px) {
+  .auto-height {
+    height: auto !important;
+  }
+}
+

@@ -1,4 +1,6 @@
 
+      <!-- <section class="content-header">
+      </section> -->
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -23,12 +25,20 @@
                             <br>
                             
                             <div class="form-group">
-                              <label for="exampleInputEmail1">Causa de la llamada</label>
-                              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Causa">
+                              <label for="causa">Causa de la llamada:</label>
+                              <?php if(!isset($_SESSION['error']['causa'])): ?>
+                                <input type="text" class="form-control" name ="causa" placeholder="Causa">
+                              <?php else: ?>
+                                <input type="text" class="form-control is-invalid" name ="causa" placeholder="Causa">
+                              <?php endif?>
                             </div>
                             <div class="form-group">
-                              <label for="exampleInputPassword1">Sintomas presentados</label>
-                              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Sintomas">
+                              <label for="sintoma">Sintomas presentados:</label>
+                              <?php if(!isset($_SESSION['error']['causa'])): ?>
+                                <input type="text" class="form-control" name ="sintoma" placeholder="Sintomas">
+                              <?php else: ?>
+                                <input type="text" class="form-control is-invalid" name ="sintoma" placeholder="Sintomas">
+                              <?php endif?>
                             </div>
 
                           <div class="mt-5 d-none d-sm-inline-block">
@@ -52,7 +62,9 @@
                         <!-- /.col -->
 
                       </div>
+                      <!-- /.row -->
                     </form>
+                    
                     </div>
                     
                   </section>
@@ -67,6 +79,7 @@
           <!-- /.row -->
 
         </div><!-- /.container-fluid -->
+        <?php unset($_SESSION['error']);?>
       </section>
       <!-- /.content -->
     

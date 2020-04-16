@@ -24,9 +24,24 @@ class doctorController{
 
 	}
 
+	public function solicitarChat(){
+
+		$_SESSION['identityDoctor']['chat'] = 'si';
+
+
+		header('Location:'.base_url.'doctor/chat');
+
+	}
+
 	public function video(){
 
 		require_once ('views/doctor/roomVideo.php');
+
+	}
+
+	public function chat(){
+
+		require_once ('./views/doctor/roomChat.php');
 
 	}
 
@@ -36,6 +51,14 @@ class doctorController{
 
 		header('Location:'.base_url.'doctor/operaciones');
 
+
+	}
+
+	public function terminarChat(){
+
+		$_SESSION['identityDoctor']['chat'] = 'no';
+
+		header('Location:'.base_url.'doctor/menuVideo');
 
 	}
 	

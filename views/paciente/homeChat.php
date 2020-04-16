@@ -1,4 +1,5 @@
-
+      <!-- <section class="content-header">
+      </section> -->
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
@@ -12,7 +13,7 @@
 
                     <div class="container-fluid">
 
-                    <form action="<?=base_url?>paciente/solicitarVideo" method="post">
+                    <form action="<?=base_url?>paciente/solicitarChat" method="post">
                       <div class="row">
 
                         <!-- col  -->
@@ -22,12 +23,20 @@
                             <br>
                             
                             <div class="form-group">
-                              <label for="exampleInputEmail1">Causa de la llamada</label>
-                              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Causa">
+                              <label for="exampleInputEmail1">Causa de la consulta:</label>
+                              <?php if(!isset($_SESSION['error']['causa'])): ?>
+                                <input type="text" class="form-control" name ="causa" placeholder="Causa">
+                              <?php else: ?>
+                                <input type="text" class="form-control is-invalid" name ="causa" placeholder="Causa">
+                              <?php endif?>
                             </div>
                             <div class="form-group">
-                              <label for="exampleInputPassword1">Sintomas presentados</label>
-                              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Sintomas">
+                              <label for="exampleInputPassword1">Sintomas presentados:</label>
+                              <?php if(!isset($_SESSION['error']['causa'])): ?>
+                                <input type="text" class="form-control" name ="sintoma" placeholder="Sintomas">
+                              <?php else: ?>
+                                <input type="text" class="form-control is-invalid" name ="sintoma" placeholder="Sintomas">
+                              <?php endif?>
                             </div>
 
                           <div class="mt-5 d-none d-sm-inline-block">
@@ -44,7 +53,9 @@
                         <div class="col-sm-12 col-md-7 align-self-center">
                           <div class="text-center my-1">
                             <button type ="submit" class="btn btn-outline-light">
-                              <img class="img-fluid img-circle" src="<?=base_url?>dist/img/icon-chat.jpg" alt="Icon Phone" style="width: 50% !important; height: 50% !important">
+                              <img class="img-fluid img-circle" src="<?=base_url?>dist/img/icon-chat.jpg" alt="Icon Phone" style="width: 40% !important; height: 50% !important">
+                              <!-- style="width: 35% !important; height: 50% !important" -->
+                                
                             </button>
                           </div>
                         </div>
@@ -66,6 +77,7 @@
           <!-- /.row -->
 
         </div><!-- /.container-fluid -->
+        <?php unset($_SESSION['error']);?>
       </section>
       <!-- /.content -->
     

@@ -10,9 +10,9 @@
   <meta name="HandheldFriendly" content="true">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="light-translucent">
-  <link rel="shortcut icon" type="image/png" href="<?=base_url?>img/ICONO.png">
-  <link rel="apple-touch-icon" href="<?=base_url?>img/ICONO.png">
-  <link rel="apple-touch-startup-image" href="<?=base_url?>img/ICONO.png">
+  <link rel="shortcut icon" type="image/png" href="<?=base_url?>dist/img/ICONO.png">
+  <link rel="apple-touch-icon" href="<?=base_url?>dist/img/ICONO.png">
+  <link rel="apple-touch-startup-image" href="<?=base_url?>dist/img/ICONO.png">
   <link rel="manifest" href="<?=base_url?>manifest.json"> <!-- Lo necesario para que la página sea progresiva y se instale en el equipo -->
 
   <!-- Font Awesome -->
@@ -55,11 +55,19 @@
       <ul class="navbar-nav container-fluid">
         <li class="nav-item d-sm-inline-block text-center">
           <h3>
-            <a href="" class="nav-link text-light" data-toggle="modal" data-target="#myModal">
-            <span>
-              <i class="nav-icon fas fa-arrow-left"></i>
-            </span>
-            </a>
+            <?php if($_SESSION['identity']['chat'] == 'no'):?>
+              <a href="" class="nav-link text-light" data-toggle="modal" data-target="#myModal">
+                <span>
+                  <i class="nav-icon fas fa-arrow-left"></i>
+                </span>
+              </a>
+            <?php else :?>
+              <a href="<?= base_url?>paciente/terminarChat" class="nav-link text-light">
+                <span>
+                  <i class="nav-icon fas fa-arrow-left"></i>
+                </span>
+              </a>
+            <?php endif?>
           </h3>
         </li>
       </ul>
@@ -98,12 +106,12 @@
               </a></strong>
             </h4>
           </li>
-          <img class="img-sm mt-2" src="<?=base_url?>dist/img/ICONO.png" alt="User profile picture">
+          <img class="img-sm mt-2 mr-2" src="<?=base_url?>dist/img/ICONO.png" alt="User profile picture">
       </ul>
     </nav>
     <!-- Fin del nav -->
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="margin-left: 0px !important;">
+    <div class="content-wrapper pt-3" style="margin-left: 0px !important;">
       <!-- Content Header (Page header) -->
-      <section class="content-header">
-      </section>
+      <!-- <section class="content-header">
+      </section> -->

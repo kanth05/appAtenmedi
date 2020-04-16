@@ -57,11 +57,19 @@
       <ul class="navbar-nav container-fluid">
         <li class="nav-item d-sm-inline-block text-center">
           <h3>
-            <a href="" class="nav-link text-light" data-toggle="modal" data-target="#myModal">
-            <span>
-              <i class="nav-icon fas fa-arrow-left"></i>
-            </span>
-            </a>
+            <?php if($_SESSION['identityDoctor']['chat'] == 'no'):?>
+              <a href="" class="nav-link text-light" data-toggle="modal" data-target="#myModal">
+                <span>
+                  <i class="nav-icon fas fa-arrow-left"></i>
+                </span>
+              </a>
+            <?php else :?>
+              <a href="<?= base_url?>doctor/terminarChat" class="nav-link text-light">
+                <span>
+                  <i class="nav-icon fas fa-arrow-left"></i>
+                </span>
+              </a>
+            <?php endif?>
           </h3>
         </li>
       </ul>
