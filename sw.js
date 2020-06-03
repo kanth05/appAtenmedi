@@ -10,6 +10,7 @@ const CACHE_NAME = 'v5_cache_programador_php',
  ]
 //durante la fase de instalación, generalmente se almacena en caché los activos estáticos
 self.addEventListener('install', e => {
+  
     e.waitUntil(
       caches.open(CACHE_NAME)
         .then(cache => {

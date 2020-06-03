@@ -21,7 +21,7 @@
                         <?php endif?>
                         <!-- Una vez se valida que la sesión falló, se elimina nuevamente -->
 
-                        <form action="<?=base_url?>loginPaciente/inicioSesion" method="post">
+                        <form action="<?=base_url?>loginPaciente/inicioSesion" method="POST">
                             <div class="input-group mb-3">
                                 <input type="number" class="form-control" placeholder="Cedula" name="cedula" required>
                                 <div class="input-group-append">

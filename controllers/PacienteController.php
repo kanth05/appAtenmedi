@@ -1,6 +1,5 @@
 <?php
 //El modelo que manejará las operaciones crud de los usuarios conectados o registrados
-//require_once 'models/usuario.php';
 
 class pacienteController{
 	
@@ -12,7 +11,7 @@ class pacienteController{
 
 		if(isset($_SESSION['identity'])){
 
-			$_SESSION['identity']['chat'] = 'no';
+			$_SESSION['identityOp']['chat'] = 'no';
 			require_once ('./views/paciente/homeVideo.php');
 
 		}else{
@@ -28,38 +27,27 @@ class pacienteController{
 		if(isset($_SESSION['servicio'])){
 			unset($_SESSION['servicio']);
 		}
-
 		if(isset($_SESSION['identity'])){
-
-			$_SESSION['identity']['chat'] = 'no';
+			$_SESSION['identityOp']['chat'] = 'no';
 			require_once ('./views/paciente/homeChat.php');
-
 		}else{
-
 			header('Location:'.base_url);
-
 		}
-
 	}
 
 	public function menuServ(){
 
 		if(isset($_SESSION['identity'])){
-
 			if(!isset($_POST['tipoServicio'])){
-				$_SESSION['identity']['chat'] = 'no';
+				$_SESSION['identityOp']['chat'] = 'no';
 				require_once ('./views/paciente/homeServicios.php');
 			}else{
 				$_SESSION['servicio'] = $_POST['tipoServicio'];
 				require_once ('./views/paciente/homeServicios.php');
 			}
-
 		}else{
-
 			header('Location:'.base_url);
-
 		}
-
 	}
 	
 	public function menuServSet(){
@@ -67,7 +55,6 @@ class pacienteController{
 		if(isset($_SESSION['servicio'])){
 			unset($_SESSION['servicio']);
 		}
-
 		if(isset($_SESSION['identity'])){
 			header('Location:'.base_url.'paciente/menuServ');
 		}else{
@@ -80,18 +67,12 @@ class pacienteController{
 		if(isset($_SESSION['servicio'])){
 			unset($_SESSION['servicio']);
 		}
-
 		if(isset($_SESSION['identity'])){
-
-			$_SESSION['identity']['chat'] = 'no';
+			$_SESSION['identityOp']['chat'] = 'no';
 			require_once ('./views/paciente/homePerfil.php');
-
 		}else{
-
 			header('Location:'.base_url);
-
 		}
-
 	}
 
 	public function solicitarServicio(){
@@ -189,7 +170,6 @@ class pacienteController{
 			$errores = array();
 			
 			// Validar los datos antes de guardarlos en la base de datos
-
 			// Validar campo causa
 			if(empty($causa)){
 
@@ -204,10 +184,11 @@ class pacienteController{
 
 			if(count($errores) == 0){
 
-				$_SESSION['identity']['video'] = 'si';
-
+				//Se crea una sesión para indicar al sistema que el usuario pasara a la video llamada
+				$_SESSION['identityOp']['video'] = 'si';
+				//Ésta sesión posee la información para acceder a la videollamada
+				$_SESSION['tokbox'] = json_decode(file_get_contents(sw_tokbox), true);
 				header('Location:'.base_url.'paciente/video');
-				
 
 			}else{
 				$_SESSION['error'] = $errores;
@@ -218,7 +199,6 @@ class pacienteController{
 			$_SESSION['error'] = $errores;
 			header('Location:'.base_url.'loginPaciente/menuVideo');
 		}
-
 	}
 
 	public function solicitarChat(){
@@ -235,7 +215,6 @@ class pacienteController{
 			$errores = array();
 			
 			// Validar los datos antes de guardarlos en la base de datos
-
 			// Validar campo causa
 			if(empty($causa)){
 
@@ -250,7 +229,7 @@ class pacienteController{
 
 			if(count($errores) == 0){
 
-				$_SESSION['identity']['chat'] = 'si';
+				$_SESSION['identityOp']['chat'] = 'si';
 
 
 				header('Location:'.base_url.'paciente/chat');
@@ -282,7 +261,7 @@ class pacienteController{
 
 	public function terminarVideo(){
 
-		$_SESSION['identity']['video'] = 'no';
+		$_SESSION['identityOp']['video'] = 'no';
 
 		header('Location:'.base_url.'paciente/menuVideo');
 
@@ -291,7 +270,7 @@ class pacienteController{
 
 	public function terminarChat(){
 
-		$_SESSION['identity']['chat'] = 'no';
+		$_SESSION['identityOp']['chat'] = 'no';
 
 		header('Location:'.base_url.'paciente/menuVideo');
 
@@ -302,10 +281,10 @@ class pacienteController{
 
 		if(isset($_POST)){
 			
-			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+			$nombre    = isset($_POST['nombre'])    ? $_POST['nombre'] : false;
 			$apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
-			$email = isset($_POST['email']) ? $_POST['email'] : false;
-			$password = isset($_POST['password']) ? $_POST['password'] : false;
+			$email     = isset($_POST['email'])     ? $_POST['email'] : false;
+			$password  = isset($_POST['password'])  ? $_POST['password'] : false;
 			
 			if($nombre && $apellidos && $email && $password){
 				$usuario = new Usuario();
@@ -327,120 +306,6 @@ class pacienteController{
 			$_SESSION['register'] = "failed";
 		}
 		header("Location:".base_url.'usuario/registro');
-	}
-
-	public function validaProducto(){
-
-		$espCaracteres = '/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/';
-
-		//Valida que la cédula insertada exista en l bd del cliente para el producto que usa
-
-		if(isset($_POST)){
-			
-			$nombre     = isset($_POST['nombre'])     ? $_POST['nombre']     : false;
-			$cedula     = isset($_POST['cedula'])     ? $_POST['cedula']     : false;
-			$tipoComp   = isset($_POST['tipo'])       ? $_POST['tipo']       : false;
-			$correo     = isset($_POST['correo'])     ? $_POST['correo']     : false;
-			$password   = isset($_POST['password'])   ? $_POST['password']   : false;
-			$repassword = isset($_POST['repassword']) ? $_POST['repassword'] : false;
-			$terminos   = isset($_POST['terminos'])   ? $_POST['terminos'] : false;
-
-			//Validación de los campos recibidos por POST
-
-			// Array de errores
-			$errores = array();
-			
-			// Validar los datos antes de guardarlos en la base de datos
-
-			// Validar campo nombre
-			if(empty($nombre) || is_numeric($nombre) || preg_match("/[0-9]/", $nombre)){
-
-				$errores['nombre'] = "El nombre no puede estar vacío o poseer números.";
-			}
-
-			//Validar si la cédula fue registrada
-			if(empty($cedula)){
-				$errores['cedula'] = 'El número de cédula no puede estár vacio.';
-			}
-
-
-			if(empty($tipoComp)){
-				$errores['tipo'] = 'Debe elegir el tipo de compañia que posee.';
-			}
-						
-			// Validar el email
-			if(empty($correo) || !filter_var($correo, FILTER_VALIDATE_EMAIL)){
-				
-				$errores['correo'] = "El correo no es válido.";
-			}
-			
-			// Validar la contraseña
-			if(empty($password)){
-
-				$errores['password'] = "La contraseña está vacía.";
-
-			}
-
-			// Validar confirmación de contraseña
-			if(empty($repassword)){
-
-				$errores['repassword'] = "Falta confirmar la contraseña.";
-				
-			}
-
-			if(empty($terminos)){
-				$errores['terminos'] = 'Debe aceptar los terminos para registrarse.';
-			}
-
-			//Validacion de contraseña, si son iguales, tienen la cantidad establecida y no poseen caracteres especiales
-			if($password != $repassword){
-
-				$errores['errorClave'] = "La contraseña tiene que ser igual en ambos campos.";
-				$errores['password'] = "No coincide";
-				$errores['repassword'] = "No coincide";
-				
-			}else{
-
-				$longitudClave = strlen($password);
-
-				if($longitudClave < 8 || $longitudClave > 12){
- 
-					$errores['errorClave'] = "La contraseña debe tener entre 8 a 12 caracteres.";
-					$errores['password']   = "No es apta";
-					$errores['repassword'] = "No es apta";
-
-				}
-
-				if(preg_match($espCaracteres, $password)){
-
-					$errores['errorClave'] = "La contraseña no debe tener caracteres como: $%&_-:; .";
-					$errores['password']   = "No es apta";
-					$errores['repassword'] = "No es apta";
-				}
-
-			}
-
-			if(count($errores) == 0){
-
-				if($cedula == 20127909){
-					//$usuario->save();
-
-					$_SESSION['register'] = 'completed';
-					header('Location:'.base_url.'loginPaciente/registro');
-				}else{
-					$_SESSION['register'] = 'failed';
-					header('Location:'.base_url.'loginPaciente/registro');
-				}
-
-			}else{
-				$_SESSION['error'] = $errores;
-				header('Location:'.base_url.'loginPaciente/registro');
-			}
-
-		}else{
-			$_SESSION['register'] = 'failed';
-			header('Location:'.base_url.'loginPaciente/registro');
-		}
 	}
 	
 	public function logout(){

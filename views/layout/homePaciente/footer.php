@@ -4,11 +4,15 @@
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
+      <div class="p-3">
+        <h5>Title</h5>
+        <p>Sidebar content</p>
+      </div>
     </aside>
     <!-- /.control-sidebar --> 
 
     <!-- footer -->
-    <footer class="main-footer bg-success py-2 px-0" style="margin-left: 0px !important;">
+    <footer class="main-footer bg-success py-2">
 
         <div class="container-xs d-block d-sm-none">
           <div class="row justify-content-center">

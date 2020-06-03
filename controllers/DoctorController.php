@@ -18,7 +18,7 @@ class doctorController{
 
 	public function solicitarVideo(){
 
-		$_SESSION['identityDoctor']['video'] = 'si';
+		$_SESSION['identityDoctorOp']['video'] = 'si';
 
 		header('Location:'.base_url.'doctor/video');
 
@@ -26,7 +26,7 @@ class doctorController{
 
 	public function solicitarChat(){
 
-		$_SESSION['identityDoctor']['chat'] = 'si';
+		$_SESSION['identityDoctorOp']['chat'] = 'si';
 
 
 		header('Location:'.base_url.'doctor/chat');
@@ -47,7 +47,7 @@ class doctorController{
 
 	public function terminarVideo(){
 
-		$_SESSION['identityDoctor']['video'] = 'no';
+		$_SESSION['identityDoctorOp']['video'] = 'no';
 
 		header('Location:'.base_url.'doctor/operaciones');
 
@@ -56,7 +56,7 @@ class doctorController{
 
 	public function terminarChat(){
 
-		$_SESSION['identityDoctor']['chat'] = 'no';
+		$_SESSION['identityDoctorOp']['chat'] = 'no';
 
 		header('Location:'.base_url.'doctor/menuVideo');
 

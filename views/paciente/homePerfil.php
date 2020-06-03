@@ -22,19 +22,19 @@
                             <form role="form">
                                 <div class="form-group">
                                   <label>Usuario:  </label>
-                                 <span> <?= $_SESSION['identity']['nombre']?> </span> 
+                                  <span> <?=$_SESSION['identity']->nombre?> </span> 
                                 </div>
                                 <div class="form-group">
                                   <label>Cédula: </label>
-                                  <span> V-<?=$_SESSION['identity']['cedula']?> </span>
+                                  <span> V-<?=$_SESSION['identity']->cedula?> </span>
                                 </div>
                                 <div class="form-group">
                                   <label>Correo: </label>
-                                  <span><?=$_SESSION['identity']['correo']?> </span>
+                                  <span><?=$_SESSION['identity']->correo?> </span>
                                 </div>
                                 <div class="form-group">
                                   <label>Compañia: </label>
-                                  <span><?=$_SESSION['identity']['compania']?> </span>
+                                  <span><?=$_SESSION['identity']->cod_compania?> </span>
                                 </div>
                                 <hr>
                                 <div class="form-group">

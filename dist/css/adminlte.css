@@ -68,6 +68,12 @@ body {
   color: #212529;
   text-align: left;
   background-color: #ffffff;
+  /*Opciones al momento de estar en el movil*/
+  /*Se descomenta cuando ya se terminen las pruebas */
+  /* overscroll-behavior-y: contain; */
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 [tabindex="-1"]:focus {

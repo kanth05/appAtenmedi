@@ -20,7 +20,7 @@
                             <?php endif?>
                         <?php endif?>
 
-                        <form action="<?=base_url?>loginDoctor/login" method="post">
+                        <form action="<?=base_url?>loginDoctor/inicioSesion" method="post">
                             <div class="input-group mb-3">
                                 <input type="number" class="form-control" placeholder="Cedula" name="cedula" required>
                                 <div class="input-group-append">

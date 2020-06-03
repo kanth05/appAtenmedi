@@ -82,7 +82,7 @@ body, html {
     } 
 
     .btn-position{
-        font-size: 3px;
+        font-size: 0.7rem;
         position: absolute;
         width: 10%;
         height: 8%;

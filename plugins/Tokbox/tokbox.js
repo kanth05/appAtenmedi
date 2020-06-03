@@ -1,15 +1,4 @@
-// replace these values with those generated in your TokBox Account
-var apiKey = "46522642";
-var sessionId = "1_MX40NjUyMjY0Mn5-MTU4MjczMDU1NDI5N353MFlqZW1ENW1XQlVzUGd5V0RRdXpJU1h-fg";
-var token = "T1==cGFydG5lcl9pZD00NjUyMjY0MiZzaWc9NWQ3ZTZiYzgwZDQ2ZDMxN2NkYzNlNzJlMjNkOTM5YTkxZmMzZDFhOTpzZXNzaW9uX2lkPTFfTVg0ME5qVXlNalkwTW41LU1UVTRNamN6TURVMU5ESTVOMzUzTUZscVpXMUVOVzFYUWxWelVHZDVWMFJSZFhwSlUxaC1mZyZjcmVhdGVfdGltZT0xNTg2ODEyMjMwJm5vbmNlPTAuMjEyODg4Njg5NTgwMzY1NjYmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTU4NzQxNjk4MyZpbml0aWFsX2xheW91dF9jbGFzc19saXN0PQ==";
-
-let btn_disconnect = document.getElementById("btn_disconect");
-
-// (optional) add server code here
-initializeSession();
-
-btn_disconnect.addEventListener("click", btnDisconnect);
-
+//Funciones para manejar la video llamada
 function btnDisconnect(){
   
   var session = OT.initSession(apiKey, sessionId);
@@ -58,3 +47,11 @@ function handleError(error) {
       }
     });
   }
+
+  let btn_disconnect = document.getElementById("btn_disconect");
+
+  initializeSession();
+//04265706357
+
+  
+  btn_disconnect.addEventListener("click", btnDisconnect);

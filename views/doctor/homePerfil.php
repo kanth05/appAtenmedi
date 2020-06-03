@@ -25,24 +25,15 @@
                               <div class="card-body pb-0">
                                 <div class="form-group">
                                   <label>Usuario:  </label>
-                                 <span> <?= $_SESSION['identityDoctor']['nombre']?> </span> 
+                                  <span> <?= $_SESSION['identityDoctor']->nombre?> </span> 
                                 </div>
                                 <div class="form-group">
                                   <label>Cédula: </label>
-                                  <span> V-<?=$_SESSION['identityDoctor']['cedula']?> </span>
+                                  <span> V-<?=$_SESSION['identityDoctor']->cedula?> </span>
                                 </div>
                                 <div class="form-group">
                                   <label>Correo: </label>
-                                  <span><?=$_SESSION['identityDoctor']['correo']?> </span>
-                                </div>
-                                <div class="form-group">
-                                  <label>Cargo: </label>
-                                  <span><?=$_SESSION['identityDoctor']['cargo']?> </span>
-                                </div>
-                                <hr>
-                                <div class="form-group">
-                                  <label>Estado: </label>
-                                  <span> <?=$_SESSION['identityDoctor']['status']?> </span>
+                                  <span><?=$_SESSION['identityDoctor']->correo?> </span>
                                 </div>
                             </form>
 

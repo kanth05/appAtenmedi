@@ -1,73 +1,63 @@
 <?php
 
-class Usuario{
-	private $id;
-	private $cod_rol;
-	private $cod_compania;
-	private $nombre;
-	private $correo;
-	private $cedula;
-	private $password;
-	private $db;
+class Medico{
+	private $idmedi;
+	private $idusr;
+	private $stsmedi;
+	private $turno;
+	private $fec_ult_conec;
 	
 	public function __construct() {
 		$this->db = Database::connect();
 	}
 	
-	function getId() {
-		return $this->id;
+	function getIdmedi() {
+		return $this->idmedi;
 	}
 
-	function getNombre() {
-		return $this->nombre;
+	function getIdusr() {
+		return $this->idusr;
 	}
 
-	function getCedula() {
-		return $this->cedula;
+	function getStsmedi() {
+		return $this->stsmedi;
 	}
 
-	function getCorreo() {
-		return $this->correo;
+	function getTurno() {
+		return $this->turno;
+    }
+    
+    function getFec_ult_conec() {
+		return $this->fec_ult_conec;
 	}
 
-	function getPassword() {
-		return password_hash($this->db->real_escape_string($this->password), PASSWORD_BCRYPT, ['cost' => 4]);
+	function setIdmedi($idmedi) {
+		$this->idmedi = $idmedi;
 	}
 
-	function getCodRol() {
-		return $this->cod_rol;
+	function setIdusr($idusr) {
+		$this->idusr = $idusr;
 	}
 
-	function getCodCompania() {
-		return $this->cod_compania;
+	function setStsmedi($stsmedi) {
+		$this->stsmedi = $stsmedi;
 	}
 
-	function setId($id) {
-		$this->id = $id;
-	} 
+	function setTurno($turno) {
+		$this->turno = $turno;
+    }
 
-	function setNombre($nombre) {
-		$this->nombre = $this->db->real_escape_string($nombre);
+    function setFec_ult_conec($fec_ult_conec) {
+		$this->fec_ult_conec = $fec_ult_conec;
 	}
 
-	function setCedula($cedula) {
-		$this->cedula = $cedula;
-	}
+    public function buscaMedicoAct(){
 
-	function setCorreo($correo) {
-		$this->correo = $this->db->real_escape_string($correo);
-	}
+		$sql    = "SELECT idmedi FROM medicos WHERE stsmedi = 'ACT'";
+		$result = $this->db->query($sql);
 
-	function setPassword($password) {
-		$this->password = $password;
-	}
+		
 
-	function setCodRol($cod_rol) {
-		$this->cod_rol = $this->db->real_escape_string($cod_rol);
-	}
-
-	function setCodCompania($cod_compania) {
-		$this->cod_compania = $this->db->real_escape_string($cod_compania);
 	}
 
 	public function registro(){
@@ -81,7 +71,7 @@ class Usuario{
 		$resultado = $this->db->query($sql);
 		
 		$sqIdusr = $resultado->fetch_object();
-		$sqIdusr = (int)$sqIdusr->maxid;
+		$sqIdusr = intval($sqIdusr->maxid);
 		$sqIdusr++;
 
 		$sql = "INSERT INTO usuarios VALUES(
@@ -101,14 +91,15 @@ class Usuario{
 	
 	public function login(){
 
-		$result   = false;
-		$cedula   = (int)$this->cedula;
+		$result = false;
+		$cedula = $this->cedula;
 		$password = $this->password;
 		// Comprobar si existe el usuario
-		$sql = "SELECT * FROM usuarios WHERE cedula = {$cedula}";
-		$usuarios = $this->db->query($sql);
-		if($usuarios && $usuarios->num_rows == 1){
-			$usuario = $usuarios->fetch_object();
+		$sql = "SELECT * FROM usuarios WHERE cedula = '$cedula'";
+		$login = $this->db->query($sql);
+		
+		if($login && $login->num_rows == 1){
+			$usuario = $login->fetch_object();
 			// Verificar la contraseña
 			$verify = password_verify($password, $usuario->contrasena);
 			if($verify){
